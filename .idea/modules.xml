@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/micro-boot.iml" filepath="$PROJECT_DIR$/.idea/micro-boot.iml" />
+      <module fileurl="file://$PROJECT_DIR$/micro-common/micro-common.iml" filepath="$PROJECT_DIR$/micro-common/micro-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/micro-common/micro-common-context/micro-common-context.iml" filepath="$PROJECT_DIR$/micro-common/micro-common-context/micro-common-context.iml" />
+      <module fileurl="file://$PROJECT_DIR$/micro-common/micro-common-dependency/micro-common-dependency.iml" filepath="$PROJECT_DIR$/micro-common/micro-common-dependency/micro-common-dependency.iml" />
+      <module fileurl="file://$PROJECT_DIR$/micro-common/micro-common-mq-base/micro-common-mq-base.iml" filepath="$PROJECT_DIR$/micro-common/micro-common-mq-base/micro-common-mq-base.iml" />
+      <module fileurl="file://$PROJECT_DIR$/micro-common/micro-common-swagger/micro-common-swagger.iml" filepath="$PROJECT_DIR$/micro-common/micro-common-swagger/micro-common-swagger.iml" />
+      <module fileurl="file://$PROJECT_DIR$/micro-gateway/micro-gateway.iml" filepath="$PROJECT_DIR$/micro-gateway/micro-gateway.iml" />
+    </modules>
+  </component>
+</project>

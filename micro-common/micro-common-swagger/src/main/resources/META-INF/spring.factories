@@ -1,0 +1,7 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  pers.lbf.microboot.common.swagger.config.SwaggerConfiguration,\
+  pers.lbf.microboot.common.swagger.config.SwaggerPropertiesConfig
+
+
+
+
