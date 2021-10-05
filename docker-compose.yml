@@ -1,0 +1,21 @@
+version: '2'
+
+services:
+  micro-redis:
+    image: redis:6.0
+    restart: always
+    container_name: micro-redis
+    hostname: micro-redis
+    ports:
+      - 6379:6379
+
+  micro-mysql:
+    build:
+      context: ./db
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    restart: always
+    container_name: micro-mysql
+    image: micro-mysql
+    ports:
+      - 3306:3306

@@ -14,7 +14,6 @@
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
-        <micro.version>1.0.0</micro.version>
     </properties>
 
     <packaging>jar</packaging>

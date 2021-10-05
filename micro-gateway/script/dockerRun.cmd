@@ -1,0 +1,1 @@
+docker run -p 81:81 --name service-gateway  --restart=always -d service-gateway:1.0.0

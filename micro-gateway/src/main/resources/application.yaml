@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: service-gateway
+  main:
+    allow-bean-definition-overriding: true
+management:
+  metrics:
+    tags:
+      application: ${spring.application.name}
+  endpoints:
+    web:
+      exposure:
+        include: "*"

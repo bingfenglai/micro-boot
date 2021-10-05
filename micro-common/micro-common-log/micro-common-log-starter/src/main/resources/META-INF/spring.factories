@@ -1,0 +1,4 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  pers.lbf.microboot.common.log.service.impl.LogServiceImpl,\
+  pers.lbf.microboot.common.log.config.LogServiceAutoConfig,\
+  pers.lbf.microboot.common.log.manager.LogDurabilityManager

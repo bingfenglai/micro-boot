@@ -1,0 +1,1 @@
+java -Xms128m -Xmx256m -jar ../dist/service-gateway-1.0.0.jar

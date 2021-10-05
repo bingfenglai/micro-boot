@@ -16,7 +16,11 @@
         <module>micro-common-context</module>
         <module>micro-common-dependency</module>
         <module>micro-common-swagger</module>
-        <module>micro-common-mq-base</module>
+        <module>micro-common-mq-provider</module>
+        <module>micro-common-core</module>
+        <module>micro-common-util</module>
+        <module>micro-common-exception-handler</module>
+        <module>micro-common-log</module>
 
     </modules>
     <properties>

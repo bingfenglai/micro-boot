@@ -1,0 +1,9 @@
+FROM mysql/mysql-server:8.0.26
+
+MAINTAINER code81192(bingfeng.lai.dev@gmail.com)
+
+ENV TZ=Asia/Shanghai
+
+RUN ln -sf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+
+ COPY ./micro.sql /docker-entrypoint-initdb.d
