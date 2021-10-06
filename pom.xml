@@ -87,7 +87,7 @@
     <dependencyManagement>
         <dependencies>
 
-            <!--  二方库-->
+
             <dependency>
                 <groupId>pers.lbf</groupId>
                 <artifactId>micro-common-dependency</artifactId>
