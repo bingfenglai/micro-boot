@@ -20,11 +20,12 @@ package pers.lbf.microboot.common.log.service.impl;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import pers.lbf.microboot.common.core.domain.result.IResult;
+import pers.lbf.microboot.common.core.domain.result.Result;
 import pers.lbf.microboot.common.log.domain.entity.LogInfoEntity;
 import pers.lbf.microboot.common.log.manager.LogDurabilityManager;
 import pers.lbf.microboot.common.log.service.LogService;
-import pers.lbf.yeju.common.core.result.IResult;
-import pers.lbf.yeju.common.core.result.Result;
+
 
 
 /**

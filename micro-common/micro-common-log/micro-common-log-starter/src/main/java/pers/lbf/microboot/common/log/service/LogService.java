@@ -17,8 +17,9 @@
 
 package pers.lbf.microboot.common.log.service;
 
+import pers.lbf.microboot.common.core.domain.result.IResult;
 import pers.lbf.microboot.common.log.domain.entity.LogInfoEntity;
-import pers.lbf.yeju.common.core.result.IResult;
+
 
 /**
  * 日志服务接口

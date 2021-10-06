@@ -12,29 +12,21 @@
     <artifactId>micro-gateway</artifactId>
 
     <properties>
-        <maven.compiler.source>8</maven.compiler.source>
-        <maven.compiler.target>8</maven.compiler.target>
         <mainClassName>pers.lbf.microboot.gateway.start.MicroGatewayApplication</mainClassName>
     </properties>
 
     <packaging>jar</packaging>
 
     <dependencies>
-        <dependency>
-            <groupId>pers.lbf</groupId>
-            <artifactId>micro-common-dependency</artifactId>
-        </dependency>
 
         <dependency>
             <groupId>pers.lbf</groupId>
             <artifactId>micro-common-swagger</artifactId>
-            <version>${micro.version}</version>
         </dependency>
 
         <dependency>
             <groupId>pers.lbf</groupId>
             <artifactId>micro-common-mq-provider</artifactId>
-            <version>${micro.version}</version>
         </dependency>
 
         <dependency>
@@ -45,19 +37,16 @@
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-alibaba-sentinel-gateway</artifactId>
-            <version>${spring-cloud-alibaba.version}</version>
         </dependency>
 
         <dependency>
             <groupId>pers.lbf</groupId>
             <artifactId>micro-common-util</artifactId>
-            <version>${micro.version}</version>
         </dependency>
 
         <dependency>
             <groupId>pers.lbf</groupId>
             <artifactId>micro-common-exception-handler</artifactId>
-            <version>${micro.version}</version>
         </dependency>
 
     </dependencies>

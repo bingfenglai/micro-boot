@@ -92,6 +92,7 @@
                 <groupId>pers.lbf</groupId>
                 <artifactId>micro-common-dependency</artifactId>
                 <version>${micro.version}</version>
+                <scope>import</scope>
             </dependency>
 
             <dependency>
@@ -115,6 +116,24 @@
             <dependency>
                 <groupId>pers.lbf</groupId>
                 <artifactId>micro-common-log-anotation</artifactId>
+                <version>${micro.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>pers.lbf</groupId>
+                <artifactId>micro-common-exception-handler</artifactId>
+                <version>${micro.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>pers.lbf</groupId>
+                <artifactId>micro-common-swagger</artifactId>
+                <version>${micro.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>pers.lbf</groupId>
+                <artifactId>micro-common-mq-provider</artifactId>
                 <version>${micro.version}</version>
             </dependency>
 
