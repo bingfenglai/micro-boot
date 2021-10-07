@@ -19,8 +19,6 @@ package pers.lbf.microboot.common.exception.handler;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.jsonwebtoken.ExpiredJwtException;
-import io.jsonwebtoken.JwtException;
 import org.apache.dubbo.rpc.RpcException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,19 +31,24 @@ import org.springframework.http.MediaType;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.stereotype.Component;
+import org.springframework.validation.BindException;
+import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.support.WebExchangeBindException;
 import org.springframework.web.server.*;
 import pers.lbf.microboot.common.context.constant.EnvironmentParamsConstant;
 import pers.lbf.microboot.common.context.constant.ServiceStatusConstant;
-import pers.lbf.microboot.common.context.status.impl.AuthStatusEnum;
 import pers.lbf.microboot.common.core.domain.result.ErrorAndExceptionResult;
 import pers.lbf.microboot.common.core.exception.ServiceException;
 import pers.lbf.microboot.common.exception.helper.DubboRpcExceptionMessageHelper;
 import reactor.core.publisher.Mono;
 
+import javax.validation.ConstraintViolation;
+import javax.validation.ConstraintViolationException;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 
 /**
  * 全局异常处理类
@@ -110,9 +113,41 @@ public class GlobalExceptionHandler implements ErrorWebExceptionHandler {
             doHandleServiceException((ServiceException) ex, result);
         } else if (ex instanceof ResponseStatusException) {
             doHandleResponseStatusException((ResponseStatusException) ex, result);
+        } else if (ex instanceof MethodArgumentNotValidException) {
+            doHandleMethodArgumentNotValidException((MethodArgumentNotValidException) ex, result);
+        } else if (ex instanceof BindException) {
+            doHandleBindException((BindException) ex, result);
+        } else if (ex instanceof ConstraintViolationException) {
+            doHandleConstraintViolationException((ConstraintViolationException) ex, result);
         } else if (ex instanceof RuntimeException) {
             doHandleRuntimeException((RuntimeException) ex, result);
         }
+    }
+
+    private void doHandleConstraintViolationException(ConstraintViolationException ex, ErrorAndExceptionResult result) {
+        Set<ConstraintViolation<?>> constraintViolations = ex.getConstraintViolations();
+        StringBuffer sb = new StringBuffer();
+        constraintViolations.forEach(constraintViolation -> {
+            sb.append(constraintViolation.getPropertyPath().toString().split("\\.")[1]).append(" : ").append(constraintViolation.getMessage()).append(";");
+        });
+        result.setMessage(sb.toString());
+    }
+
+    private void doHandleBindException(BindException ex, ErrorAndExceptionResult result) {
+        StringBuffer sb = new StringBuffer();
+        ex.getBindingResult().getFieldErrors().forEach(fieldError -> {
+            sb.append(fieldError.getDefaultMessage()).append(";");
+        });
+        result.setMessage(sb.toString());
+    }
+
+    private void doHandleMethodArgumentNotValidException(MethodArgumentNotValidException ex, ErrorAndExceptionResult result) {
+        List<FieldError> fieldErrors = ex.getBindingResult().getFieldErrors();
+        StringBuffer sb = new StringBuffer();
+        fieldErrors.forEach(fieldError -> {
+            sb.append(fieldError.getDefaultMessage()).append(";");
+        });
+        result.setMessage(sb.toString());
     }
 
     private void doHandleDubboCallRpcException(RpcException ex, ErrorAndExceptionResult result) {
@@ -128,23 +163,8 @@ public class GlobalExceptionHandler implements ErrorWebExceptionHandler {
 
 
     private void doHandleRuntimeException(RuntimeException ex, ErrorAndExceptionResult result) {
-        if (ex instanceof JwtException) {
-            doHandleJwtException((JwtException) ex, result);
-            return;
-        }
 
         result.setMessage(ex.getMessage());
-    }
-
-    private void doHandleJwtException(JwtException ex, ErrorAndExceptionResult result) {
-        if (ex instanceof ExpiredJwtException) {
-            result.setMessage(AuthStatusEnum.NO_TOKEN.getMessage());
-            result.setCode(AuthStatusEnum.NO_TOKEN.getCode());
-        } else {
-            result.setMessage(ex.getMessage());
-        }
-
-
     }
 
     /**

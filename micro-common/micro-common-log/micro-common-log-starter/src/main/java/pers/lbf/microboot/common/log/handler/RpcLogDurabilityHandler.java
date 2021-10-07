@@ -19,12 +19,10 @@ package pers.lbf.microboot.common.log.handler;
 
 import cn.hutool.core.bean.BeanUtil;
 import pers.lbf.microboot.common.log.constants.enums.LogDurabilityChannelEnum;
-import pers.lbf.microboot.common.log.dao.OperationLogDao;
 import pers.lbf.microboot.common.log.domain.entity.LogInfoEntity;
 import pers.lbf.microboot.common.log.domain.entity.OperationLogEntity;
 import pers.lbf.microboot.common.log.domain.params.CreateAuthcLogParams;
 import pers.lbf.microboot.common.log.domain.params.CreateOperationLogParams;
-import pers.lbf.microboot.common.utils.SpringContextUtils;
 
 /**
  * TODO
@@ -33,10 +31,10 @@ import pers.lbf.microboot.common.utils.SpringContextUtils;
  * @version 1.0
  * @date 2021/10/6 0:28
  */
-public class MysqlLogDurabilityHandler extends AbstractLogDurabilityHandler {
+public class RpcLogDurabilityHandler extends AbstractLogDurabilityHandler {
 
 
-    public MysqlLogDurabilityHandler(LogDurabilityChannelEnum channel, AbstractLogDurabilityHandler next) {
+    public RpcLogDurabilityHandler(LogDurabilityChannelEnum channel, AbstractLogDurabilityHandler next) {
         super(channel, next);
     }
 
@@ -64,7 +62,7 @@ public class MysqlLogDurabilityHandler extends AbstractLogDurabilityHandler {
     protected void saveOperationLog(LogInfoEntity logInfo) {
         CreateOperationLogParams params = (CreateOperationLogParams) logInfo;
         OperationLogEntity operationLogEntity = BeanUtil.copyProperties(params, OperationLogEntity.class);
-        OperationLogDao operationLogDao = SpringContextUtils.getBean(OperationLogDao.class);
+
         // TODO
     }
 

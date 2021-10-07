@@ -17,6 +17,8 @@
 
 package pers.lbf.microboot.common.log.anotation;
 
+import java.lang.annotation.*;
+
 /**
  * 日志切入点
  *
@@ -24,5 +26,10 @@ package pers.lbf.microboot.common.log.anotation;
  * @version 1.0
  * @date 2021/10/5 13:03
  */
+@Target({ElementType.METHOD, ElementType.TYPE})
+@Retention(RetentionPolicy.RUNTIME)
+@Documented
 public @interface Log {
+
+    String value() default "";
 }

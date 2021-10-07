@@ -28,7 +28,7 @@ public enum LogDurabilityChannelEnum {
     /**
      * 直接写入mysql
      */
-    MYSQL_CHANNEL("MYSQL"),
+    REMOTE_PROCESS_CALL("REMOTE_PROCESS_CALL"),
 
     /**
      * 经rabbit消息中间件写入mysql

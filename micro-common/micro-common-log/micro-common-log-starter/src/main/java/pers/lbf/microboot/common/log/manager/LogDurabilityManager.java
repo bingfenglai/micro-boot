@@ -22,7 +22,7 @@ import org.springframework.stereotype.Component;
 import pers.lbf.microboot.common.log.constants.enums.LogDurabilityChannelEnum;
 import pers.lbf.microboot.common.log.domain.entity.LogInfoEntity;
 import pers.lbf.microboot.common.log.handler.AbstractLogDurabilityHandler;
-import pers.lbf.microboot.common.log.handler.MysqlLogDurabilityHandler;
+import pers.lbf.microboot.common.log.handler.RpcLogDurabilityHandler;
 
 /**
  * TODO
@@ -38,7 +38,7 @@ public class LogDurabilityManager {
     private final static AbstractLogDurabilityHandler HANDLER;
 
     static {
-        HANDLER = new MysqlLogDurabilityHandler(LogDurabilityChannelEnum.MYSQL_CHANNEL, null);
+        HANDLER = new RpcLogDurabilityHandler(LogDurabilityChannelEnum.REMOTE_PROCESS_CALL, null);
     }
 
     public void saveLog(LogInfoEntity logInfo) {
