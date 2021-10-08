@@ -14,6 +14,11 @@ spring:
         file-extension: yaml
         group: micro-boot
         shared-configs:
-          - application-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension}
-          - cn.yaml
+          - data-id: application-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension}
+            group: ${spring.cloud.nacos.config.group}
+            refresh: true
         namespace: 5e8166a6-7be6-4290-961c-cd41864f9496
+        refresh-enabled: true
+      discovery:
+        group: ${spring.cloud.nacos.config.group}
+        namespace: ${spring.cloud.nacos.config.namespace}
