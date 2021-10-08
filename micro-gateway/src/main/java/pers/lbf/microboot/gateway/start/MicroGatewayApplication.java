@@ -17,10 +17,11 @@
 
 package pers.lbf.microboot.gateway.start;
 
-import lombok.extern.log4j.Log4j;
+
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 /**
  * 微服务网关启动类
@@ -31,6 +32,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  */
 @SpringBootApplication(scanBasePackages = "pers.lbf.microboot.gateway")
 @Slf4j
+@EnableDiscoveryClient
 public class MicroGatewayApplication {
 
     public static void main(String[] args) {

@@ -25,14 +25,12 @@
         <dependency>
             <groupId>pers.lbf</groupId>
             <artifactId>micro-common-core</artifactId>
-            <version>${micro.version}</version>
         </dependency>
 
 
         <dependency>
             <groupId>org.apache.dubbo</groupId>
             <artifactId>dubbo</artifactId>
-            <version>${dubbo.version}</version>
         </dependency>
 
         <dependency>

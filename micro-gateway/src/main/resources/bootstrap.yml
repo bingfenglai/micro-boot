@@ -1,17 +1,19 @@
 server:
-  port: 9001
+  port: 81
 spring:
+  main:
+    allow-bean-definition-overriding: true
   application:
-    name: micro-basic-support-service
+    name: micro-gateway
   profiles:
     active: dev
   cloud:
     nacos:
       server-addr: ${NACOS_HOST:register.microcloud.com}:${NACOS_PORT:8848}
-      ser
       config:
         file-extension: yaml
         group: micro-boot
         shared-configs:
           - application-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension}
-        namespace: micro-boot
+          - cn.yaml
+        namespace: 5e8166a6-7be6-4290-961c-cd41864f9496

@@ -20,7 +20,6 @@
         <dependency>
             <groupId>pers.lbf</groupId>
             <artifactId>micro-common-context</artifactId>
-            <version>${micro.version}</version>
         </dependency>
     </dependencies>
 

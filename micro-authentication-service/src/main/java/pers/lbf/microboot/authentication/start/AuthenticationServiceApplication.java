@@ -15,19 +15,27 @@
  *
  */
 
-package pers.lbf.microboot.gateway.config;
+package pers.lbf.microboot.authentication.start;
 
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
-import org.springframework.context.annotation.Configuration;
 
 /**
- * 服务发现配置
+ * TODO
  *
  * @author 赖柄沣 bingfengdev@aliyun.com
  * @version 1.0
- * @date 2021/7/5 17:50
+ * @date 2021/10/8 22:09
  */
-@Configuration
+@SpringBootApplication(scanBasePackages = "pers.lbf.microboot.authentication")
+@Slf4j
 @EnableDiscoveryClient
-public class DiscoveryConfig {
+public class AuthenticationServiceApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(AuthenticationServiceApplication.class, args);
+
+    }
 }

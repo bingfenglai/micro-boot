@@ -2,20 +2,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <modules>
-        <module>micro-common</module>
-        <module>micro-gateway</module>
-        <module>micro-api</module>
-        <module>micro-authentication-service</module>
-        <module>micro-basic-support-services</module>
 
-    </modules>
-    <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.2.11.RELEASE</version>
-        <relativePath/> <!-- lookup parent from repository -->
-    </parent>
     <groupId>pers.lbf</groupId>
     <artifactId>micro-boot</artifactId>
     <version>1.0.0</version>
@@ -24,15 +11,27 @@
 
     <packaging>pom</packaging>
 
+    <modules>
+        <module>micro-common</module>
+        <module>micro-gateway</module>
+        <module>micro-api</module>
+        <module>micro-authentication-service</module>
+        <module>micro-basic-support-services</module>
+    </modules>
+
 
     <properties>
-        <micro.version>${project.version}</micro.version>
-        <spring.boot.version>2.2.11.RELEASE</spring.boot.version>
+
         <java.version>1.8</java.version>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <spring-cloud-alibaba.version>2.2.3.RELEASE</spring-cloud-alibaba.version>
-        <spring-cloud.version>Hoxton.SR5</spring-cloud.version>
+
+        <spring-cloud-alibaba.version>2021.1</spring-cloud-alibaba.version>
+        <spring-cloud.version>2020.0.4</spring-cloud.version>
+        <spring.boot.version>2.5.5</spring.boot.version>
+        <spring-cloud-security.version>2.2.4.RELEASE</spring-cloud-security.version>
         <lombok.version>1.18.20</lombok.version>
         <dubbo.version>2.7.8</dubbo.version>
         <dubbo-api.version>2.7.8.1</dubbo-api.version>
@@ -55,7 +54,6 @@
         <whvcse.version>1.6.2</whvcse.version>
         <poi.version>3.17</poi.version>
         <mysql.version>8.0.22</mysql.version>
-        <webflux.version>2.3.0.RELEASE</webflux.version>
         <jwt.version>0.10.7</jwt.version>
         <joda.version>2.10.5</joda.version>
         <jackson.version>2.11.2</jackson.version>
@@ -71,12 +69,16 @@
         <logstash.version>4.10</logstash.version>
         <log4j.version>1.2.15</log4j.version>
         <hutool.version>5.7.13</hutool.version>
+        <spring-cloud-context.version>3.0.4</spring-cloud-context.version>
+        <spring-context.version>5.3.10</spring-context.version>
+        <jakarta.validation.version>2.0.2</jakarta.validation.version>
+        <aspectjrt.version>1.9.7</aspectjrt.version>
     </properties>
 
     <!--    每个模块都有的依赖-->
     <dependencies>
 
-        <!--            其他-->
+
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
@@ -86,59 +88,10 @@
 
     </dependencies>
 
-
     <dependencyManagement>
+
+
         <dependencies>
-
-
-            <dependency>
-                <groupId>pers.lbf</groupId>
-                <artifactId>micro-common-dependency</artifactId>
-                <version>${micro.version}</version>
-                <scope>import</scope>
-            </dependency>
-
-            <dependency>
-                <groupId>pers.lbf</groupId>
-                <artifactId>micro-common-core</artifactId>
-                <version>${micro.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>pers.lbf</groupId>
-                <artifactId>micro-common-context</artifactId>
-                <version>${micro.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>pers.lbf</groupId>
-                <artifactId>micro-common-util</artifactId>
-                <version>${micro.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>pers.lbf</groupId>
-                <artifactId>micro-common-log-anotation</artifactId>
-                <version>${micro.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>pers.lbf</groupId>
-                <artifactId>micro-common-exception-handler</artifactId>
-                <version>${micro.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>pers.lbf</groupId>
-                <artifactId>micro-common-swagger</artifactId>
-                <version>${micro.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>pers.lbf</groupId>
-                <artifactId>micro-common-mq-provider</artifactId>
-                <version>${micro.version}</version>
-            </dependency>
 
             <!--            spring cloud -->
             <dependency>
@@ -148,7 +101,7 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-            <!--            nacos sentinel seata oos sms-->
+            <!--            spring cloud alibaba-->
             <dependency>
                 <groupId>com.alibaba.cloud</groupId>
                 <artifactId>spring-cloud-alibaba-dependencies</artifactId>
@@ -157,13 +110,64 @@
                 <scope>import</scope>
             </dependency>
 
+            <!-- spring boot 依赖 -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring.boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!-- 二方库依赖-->
+            <dependency>
+                <groupId>pers.lbf</groupId>
+                <artifactId>micro-common-dependency</artifactId>
+                <version>${project.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-security-dependencies</artifactId>
+                <version>${spring-cloud-security.version}</version>
+            </dependency>
+
             <!--            dubbo 依赖 服务调用-->
+            <!--            sentinel整合dubbo-->
+            <dependency>
+                <groupId>com.alibaba.csp</groupId>
+                <artifactId>sentinel-apache-dubbo-adapter</artifactId>
+                <version>${sentinel.csp.version}</version>
+            </dependency>
+
             <dependency>
                 <groupId>org.apache.dubbo</groupId>
                 <artifactId>dubbo-spring-boot-starter</artifactId>
                 <version>${dubbo.version}</version>
                 <scope>compile</scope>
             </dependency>
+
+            <dependency>
+                <groupId>org.apache.dubbo</groupId>
+                <artifactId>dubbo</artifactId>
+                <version>${dubbo.version}</version>
+            </dependency>
+
+
+            <dependency>
+                <groupId>com.alibaba.csp</groupId>
+                <artifactId>sentinel-datasource-nacos</artifactId>
+                <version>${sentinel.csp.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.alibaba.csp</groupId>
+                <artifactId>sentinel-annotation-aspectj</artifactId>
+                <version>${sentinel.csp.version}</version>
+            </dependency>
+
 
             <!--            序列化-->
             <dependency>
@@ -187,28 +191,6 @@
                 <version>${springfox.version}</version>
             </dependency>
 
-            <!--            springboot-->
-
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-aop</artifactId>
-                <version>${spring.boot.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter</artifactId>
-                <version>${spring.boot.version}</version>
-            </dependency>
-
-
-            <!--  SpringBoot 监控客户端 -->
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-actuator</artifactId>
-                <version>${spring.boot.version}</version>
-            </dependency>
-
             <!-- Micrometer Prometheus registry  -->
             <dependency>
                 <groupId>io.micrometer</groupId>
@@ -222,107 +204,6 @@
                 <version>${spring-boot-admin.version}</version>
             </dependency>
 
-            <!--           消息中间件 -->
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-amqp</artifactId>
-                <version>${spring.boot.version}</version>
-            </dependency>
-
-            <!--            邮件-->
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-mail</artifactId>
-                <version>${spring.boot.version}</version>
-            </dependency>
-
-            <!--        web层-->
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-webflux</artifactId>
-                <version>${webflux.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-websocket</artifactId>
-                <version>${spring.boot.version}</version>
-            </dependency>
-
-            <!--            服务配置中心-->
-            <dependency>
-                <groupId>com.alibaba.cloud</groupId>
-                <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
-                <version>${spring-cloud-alibaba.version}</version>
-            </dependency>
-
-            <!--            服务发现-->
-            <dependency>
-                <groupId>com.alibaba.cloud</groupId>
-                <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
-                <version>${spring-cloud-alibaba.version}</version>
-
-            </dependency>
-
-            <!--            服务流控-->
-            <dependency>
-                <groupId>com.alibaba.cloud</groupId>
-                <artifactId>spring-cloud-starter-alibaba-sentinel</artifactId>
-                <version>${spring-cloud-alibaba.version}</version>
-
-            </dependency>
-
-            <dependency>
-                <groupId>com.alibaba.cloud</groupId>
-                <artifactId>spring-cloud-alibaba-sentinel-datasource</artifactId>
-                <version>${spring-cloud-alibaba.version}</version>
-
-            </dependency>
-
-            <dependency>
-                <groupId>com.alibaba.cloud</groupId>
-                <artifactId>spring-cloud-alibaba-sentinel-gateway</artifactId>
-                <version>${spring-cloud-alibaba.version}</version>
-            </dependency>
-
-            <!--            sentinel整合dubbo-->
-            <dependency>
-                <groupId>com.alibaba.csp</groupId>
-                <artifactId>sentinel-apache-dubbo-adapter</artifactId>
-                <version>${sentinel.csp.version}</version>
-            </dependency>
-
-            <!--            分布式事务-->
-            <dependency>
-                <groupId>com.alibaba.cloud</groupId>
-                <artifactId>spring-cloud-starter-alibaba-seata</artifactId>
-                <version>${spring-cloud-alibaba.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.alibaba.csp</groupId>
-                <artifactId>sentinel-datasource-nacos</artifactId>
-                <version>${sentinel.csp.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.alibaba.csp</groupId>
-                <artifactId>sentinel-annotation-aspectj</artifactId>
-                <version>${sentinel.csp.version}</version>
-            </dependency>
-
-            <!--        对象存储-->
-            <dependency>
-                <groupId>com.alibaba.cloud</groupId>
-                <artifactId>aliyun-oss-spring-boot-starter</artifactId>
-            </dependency>
-
-            <!--            阿里短信-->
-            <dependency>
-                <groupId>com.alibaba.cloud</groupId>
-                <artifactId>aliyun-sms-spring-boot-starter</artifactId>
-                <version>${aliyun.sms.version}</version>
-            </dependency>
 
             <!--            数据连接层 start-->
 
@@ -347,40 +228,10 @@
                 <version>${mybatis.plus.version}</version>
             </dependency>
 
-            <!--            NoSQL-->
             <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-data-mongodb-reactive</artifactId>
-                <version>${spring.boot.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-data-redis-reactive</artifactId>
-                <version>${spring.boot.version}</version>
-            </dependency>
-
-            <!--            数据连接层 end-->
-
-
-            <!--            security start-->
-
-            <dependency>
-                <groupId>org.springframework.cloud</groupId>
-                <artifactId>spring-cloud-starter-oauth2</artifactId>
-            </dependency>
-
-            <dependency>
-                <groupId>org.springframework.cloud</groupId>
-                <artifactId>spring-cloud-starter-security</artifactId>
-                <version>${spring.cloud.security.version}</version>
-            </dependency>
-
-            <!--            参数校验框架-->
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-validation</artifactId>
-                <version>${spring.boot.version}</version>
+                <groupId>jakarta.validation</groupId>
+                <artifactId>jakarta.validation-api</artifactId>
+                <version>${jakarta.validation.version}</version>
             </dependency>
 
             <!--    xss攻击相关-->
@@ -392,13 +243,7 @@
 
             <!--            security end-->
 
-            <!--            测试相关-->
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-test</artifactId>
-                <scope>test</scope>
-                <version>${spring.boot.version}</version>
-            </dependency>
+
             <dependency>
                 <groupId>io.projectreactor</groupId>
                 <artifactId>reactor-test</artifactId>
@@ -476,25 +321,6 @@
                 <version>${common-pool.version}</version>
             </dependency>
 
-            <!--jwt所需jar包-->
-            <!--            <dependency>-->
-            <!--                <groupId>io.jsonwebtoken</groupId>-->
-            <!--                <artifactId>jjwt-api</artifactId>-->
-            <!--                <version>${jwt.version}</version>-->
-            <!--            </dependency>-->
-            <!--            <dependency>-->
-            <!--                <groupId>io.jsonwebtoken</groupId>-->
-            <!--                <artifactId>jjwt-impl</artifactId>-->
-            <!--                <version>${jwt.version}</version>-->
-            <!--                <scope>runtime</scope>-->
-            <!--            </dependency>-->
-            <!--            <dependency>-->
-            <!--                <groupId>io.jsonwebtoken</groupId>-->
-            <!--                <artifactId>jjwt-jackson</artifactId>-->
-            <!--                <version>${jwt.version}</version>-->
-            <!--                <scope>runtime</scope>-->
-            <!--            </dependency>-->
-
             <!--            处理日期-->
             <dependency>
                 <groupId>joda-time</groupId>
@@ -509,40 +335,6 @@
                 <version>${arthas.version}</version>
                 <scope>runtime</scope>
             </dependency>
-
-            <!--            日志-->
-
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-logging</artifactId>
-                <version>${spring.boot.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>log4j</groupId>
-                <artifactId>log4j</artifactId>
-                <version>${log4j.version}</version>
-                <exclusions>
-                    <exclusion>
-                        <groupId>javax.mail</groupId>
-                        <artifactId>mail</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>javax.jms</groupId>
-                        <artifactId>jms</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>com.sun.jdmk</groupId>
-                        <artifactId>jmxtools</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>com.sun.jmx</groupId>
-                        <artifactId>jmxri</artifactId>
-                    </exclusion>
-                </exclusions>
-                <scope>compile</scope>
-            </dependency>
-
 
             <!--            序列化-->
             <!--处理json工具包-->
@@ -566,18 +358,16 @@
                 <version>1.21</version>
             </dependency>
 
-
-            <!--            &lt;!&ndash;            算法库&ndash;&gt;-->
-            <!--            <dependency>-->
-            <!--                <groupId>org.apache.mahout</groupId>-->
-            <!--                <artifactId>mahout-core</artifactId>-->
-            <!--                <version>${mahout.version}</version>-->
-            <!--            </dependency>-->
-
             <dependency>
                 <groupId>cn.hutool</groupId>
                 <artifactId>hutool-all</artifactId>
                 <version>${hutool.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.aspectj</groupId>
+                <artifactId>aspectjrt</artifactId>
+                <version>${aspectjrt.version}</version>
             </dependency>
 
         </dependencies>
@@ -623,7 +413,6 @@
         <profile>
 
             <id>dev</id>
-
             <properties>
                 <profileActive>dev</profileActive>
             </properties>

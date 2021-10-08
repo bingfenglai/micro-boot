@@ -20,13 +20,28 @@
     <dependencies>
 
         <dependency>
-            <groupId>pers.lbf</groupId>
-            <artifactId>micro-common-swagger</artifactId>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
         </dependency>
 
         <dependency>
             <groupId>pers.lbf</groupId>
             <artifactId>micro-common-mq-provider</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>pers.lbf</groupId>
+            <artifactId>micro-common-util</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-webflux</artifactId>
         </dependency>
 
         <dependency>
@@ -36,18 +51,46 @@
 
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
-            <artifactId>spring-cloud-alibaba-sentinel-gateway</artifactId>
+            <artifactId>spring-cloud-starter-alibaba-sentinel</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>pers.lbf</groupId>
-            <artifactId>micro-common-util</artifactId>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-alibaba-sentinel-gateway</artifactId>
         </dependency>
 
         <dependency>
             <groupId>pers.lbf</groupId>
             <artifactId>micro-common-exception-handler</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>pers.lbf</groupId>
+            <artifactId>micro-common-swagger</artifactId>
+        </dependency>
+
+        <!--bootstrap 启动器-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-bootstrap</artifactId>
+        </dependency>
+        <!--配置文件处理器-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
+        </dependency>
+
+        <!--        <dependency>-->
+        <!--            <groupId>org.springframework.boot</groupId>-->
+        <!--            <artifactId>spring-boot-starter-log4j2</artifactId>-->
+        <!--        </dependency>-->
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-logging</artifactId>
+        </dependency>
+
 
     </dependencies>
 
@@ -59,16 +102,21 @@
             <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>
+            <properties>
+                <profileActive>dev</profileActive>
+            </properties>
             <build>
                 <plugins>
                     <plugin>
                         <groupId>org.springframework.boot</groupId>
                         <artifactId>spring-boot-maven-plugin</artifactId>
+                        <version>${spring.boot.version}</version>
                     </plugin>
 
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-surefire-plugin</artifactId>
+                        <version>2.12.4</version>
                         <configuration>
                             <skipTests>false</skipTests>
                         </configuration>
@@ -85,6 +133,9 @@
             <id>prod</id>
             <properties>
                 <dist.rootPath>./dist/</dist.rootPath>
+
+                <profileActive>prod</profileActive>
+
             </properties>
             <build>
                 <plugins>
@@ -182,12 +233,7 @@
                                               file="src/main/resources/application.yml"/>
 
                                         <copy todir="../${dist.rootPath}/${project.build.finalName}/bin/config"
-                                              file="src/main/resources/application-${profile.id.prod}.yml"/>
-
-                                        <copy todir="../${dist.rootPath}/${project.build.finalName}/bin/config"
-                                              file="src/main/resources/bootstrap.properties"/>
-                                        <copy todir="../${dist.rootPath}/${project.build.finalName}/bin/config"
-                                              file="src/main/resources/bootstrap-${profile.id.prod}.properties"/>
+                                              file="src/main/resources/bootstrap.yaml"/>
 
                                     </target>
                                 </configuration>

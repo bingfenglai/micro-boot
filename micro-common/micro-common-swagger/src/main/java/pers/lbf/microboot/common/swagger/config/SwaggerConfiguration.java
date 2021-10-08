@@ -51,7 +51,7 @@ public class SwaggerConfiguration extends Swagger2WebFluxConfiguration {
 
     @Bean
     public Docket createRestApi() {
-
+        log.warn("swagger-ui 配置：{}", config.toString());
         return new Docket(DocumentationType.OAS_30).pathMapping("/" + config.getApplicationName())
                 // 定义是否开启swagger，false为关闭，可以通过变量控制
                 .enable(config.getEnable())

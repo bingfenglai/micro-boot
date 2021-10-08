@@ -17,11 +17,8 @@
 
 package pers.lbf.microboot.common.log.test;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
-import pers.lbf.microboot.common.log.domain.params.CreateAuthcLogParams;
-import pers.lbf.microboot.common.log.service.LogService;
-import pers.lbf.microboot.common.log.service.impl.LogServiceImpl;
 
 /**
  * TODO

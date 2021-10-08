@@ -23,4 +23,13 @@
 hs_err_pid*
 .idea
 *.iml
+/micro-common/micro-common-dependency/*.iml
 *.iml
+*.iml
+*.iml
+/micro-common/micro-common-util/*.iml
+/micro-common/micro-common-swagger/*.iml
+/micro-common/micro-common-mq-provider/micro-common-mq-provider.iml
+/micro-common/micro-common-log/micro-common-log-starter/*.iml
+/micro-common/micro-common-exception-handler/*.iml
+/micro-gateway/*.iml
