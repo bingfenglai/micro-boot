@@ -22,7 +22,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringBootVersion;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import pers.lbf.microboot.common.context.constant.AccessTokenConstant;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
@@ -48,6 +47,8 @@ public class SwaggerConfiguration extends Swagger2WebFluxConfiguration {
 
     @Autowired
     private SwaggerPropertiesConfig config;
+
+    public static final String ACCESS_TOKEN_KEY = "Authorization";
 
     @Bean
     public Docket createRestApi() {
@@ -79,7 +80,7 @@ public class SwaggerConfiguration extends Swagger2WebFluxConfiguration {
                 SecurityContext.builder()
                         .securityReferences(
                                 Collections.singletonList(
-                                        new SecurityReference(AccessTokenConstant.TOKEN_KEY,
+                                        new SecurityReference(ACCESS_TOKEN_KEY,
                                                 new AuthorizationScope[]{
                                                         new AuthorizationScope("global",
                                                                 "")})))
@@ -89,7 +90,7 @@ public class SwaggerConfiguration extends Swagger2WebFluxConfiguration {
     }
 
     private List<SecurityScheme> securitySchemes() {
-        ApiKey apiKey = new ApiKey(AccessTokenConstant.TOKEN_KEY, AccessTokenConstant.TOKEN_KEY, In.HEADER.toValue());
+        ApiKey apiKey = new ApiKey(ACCESS_TOKEN_KEY, ACCESS_TOKEN_KEY, In.HEADER.toValue());
         return Collections.singletonList(apiKey);
     }
 

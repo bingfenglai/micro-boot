@@ -24,11 +24,11 @@ import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.core.Ordered;
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
-import pers.lbf.microboot.common.context.constant.OperationTypeConstant;
-import pers.lbf.microboot.common.context.status.impl.AuthStatusEnum;
-import pers.lbf.microboot.common.core.exception.ServiceException;
+import pers.lbf.microboot.common.core.exception.MicroServiceException;
+import pers.lbf.microboot.common.i18n.constants.status.AuthStatusEnum;
 import pers.lbf.microboot.common.utils.MicroStringUtils;
 import pers.lbf.microboot.gateway.config.AccessWhiteProperties;
+import pers.lbf.microboot.gateway.constants.OperationTypeConstant;
 import pers.lbf.microboot.gateway.util.HttpUtils;
 import reactor.core.publisher.Mono;
 
@@ -63,7 +63,7 @@ public class PrefixAuthenticationFilter implements GlobalFilter, Ordered {
         // 2. 判断访问路径是否在放行白名单当中
         if (!MicroStringUtils.matches(path, accessWhiteProperties.getWhites())) {
             log.warn("{} 访问 {} 鉴权不通过", HttpUtils.getIpAddress(exchange.getRequest()), path);
-            throw new ServiceException(AuthStatusEnum.NO_TOKEN);
+            throw new MicroServiceException(AuthStatusEnum.NO_TOKEN);
         }
 
         //2.2 token存在则放行

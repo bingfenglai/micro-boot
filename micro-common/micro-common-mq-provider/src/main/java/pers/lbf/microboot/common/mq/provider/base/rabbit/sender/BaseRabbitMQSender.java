@@ -62,13 +62,6 @@ public abstract class BaseRabbitMQSender {
     };
 
 
-    // 消息返回机制
-    RabbitTemplate.ReturnCallback returnCallback =
-            (message, i, replyText, exchange, routingKey) -> {
-                log.info("message: {}", message.toString());
-                log.info("replyText: {}", replyText);
-            };
-
     protected void send(Object message, Map<String, Object> properties, BaseRabbitMqExchangeConfig mqExchangeConfig) throws RuntimeException {
         if (mqExchangeConfig == null) {
             throw new RuntimeException("消息交换机配置不能为空");
@@ -78,7 +71,14 @@ public abstract class BaseRabbitMQSender {
         //注意导包
         Message<Object> msg = MessageBuilder.createMessage(message, messageHeaders);
         rabbitTemplate.setConfirmCallback(confirmCallback);
-        rabbitTemplate.setReturnCallback(returnCallback);
+
+        rabbitTemplate.setReturnsCallback(returned -> {
+            log.info("rabbit call back");
+            log.info(returned.toString());
+
+        });
+       
+        //rabbitTemplate.setReturnCallback();
         //id + 时间戳 ，保证全局唯一 ，这个是实际消息的ID
         //在做补偿性机制的时候通过ID来获取到这条消息进行重发
         String id = UUID.randomUUID().toString();

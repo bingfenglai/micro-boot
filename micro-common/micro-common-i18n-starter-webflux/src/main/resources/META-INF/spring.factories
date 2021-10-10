@@ -1,0 +1,3 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  pers.lbf.microboot.common.i18n.config.I18nAutoConfiguration,\
+  pers.lbf.microboot.common.i18n.util.LocaleMessageHolder

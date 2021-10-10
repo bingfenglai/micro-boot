@@ -17,6 +17,8 @@
 
 package pers.lbf.microboot.common.core.domain.result;
 
+import pers.lbf.microboot.common.core.status.IStatus;
+
 /**
  * json响应结果接口
  *
@@ -53,4 +55,53 @@ public interface IResult<T> {
      * @return success flag
      */
     Boolean isSuccess();
+
+    /**
+     * 默认成功的响应
+     *
+     * @return
+     */
+    static IResult<Boolean> success() {
+        return new IResult<Boolean>() {
+            /**
+             * 获取响应代码
+             *
+             * @return code
+             */
+            @Override
+            public String getCode() {
+                return IStatus.successStatus().getCode();
+            }
+
+            /**
+             * 获取响应消息
+             *
+             * @return message
+             */
+            @Override
+            public String getMessage() {
+                return IStatus.unknownStatus().getMessage();
+            }
+
+            /**
+             * 获取响应数据
+             *
+             * @return t
+             */
+            @Override
+            public Boolean getData() {
+                return true;
+            }
+
+            /**
+             * 请求是否成功
+             *
+             * @return success flag
+             */
+            @Override
+            public Boolean isSuccess() {
+                return true;
+            }
+        };
+    }
 }

@@ -40,8 +40,8 @@
         </dependency>
 
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-webflux</artifactId>
+            <groupId>pers.lbf</groupId>
+            <artifactId>micro-common-i18n-starter-webflux</artifactId>
         </dependency>
 
         <dependency>

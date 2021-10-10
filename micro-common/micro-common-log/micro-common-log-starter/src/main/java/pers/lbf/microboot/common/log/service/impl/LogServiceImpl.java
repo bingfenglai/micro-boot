@@ -21,11 +21,9 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import pers.lbf.microboot.common.core.domain.result.IResult;
-import pers.lbf.microboot.common.core.domain.result.Result;
 import pers.lbf.microboot.common.log.domain.entity.LogInfoEntity;
 import pers.lbf.microboot.common.log.manager.LogDurabilityManager;
 import pers.lbf.microboot.common.log.service.LogService;
-
 
 
 /**
@@ -46,6 +44,6 @@ public class LogServiceImpl implements LogService {
     @Override
     public IResult<Boolean> save(LogInfoEntity logInfoEntity) {
         logDurabilityManager.saveLog(logInfoEntity);
-        return Result.success();
+        return IResult.success();
     }
 }

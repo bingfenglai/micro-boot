@@ -16,11 +16,4 @@
         <maven.compiler.target>8</maven.compiler.target>
     </properties>
 
-    <dependencies>
-        <dependency>
-            <groupId>pers.lbf</groupId>
-            <artifactId>micro-common-context</artifactId>
-        </dependency>
-    </dependencies>
-
 </project>

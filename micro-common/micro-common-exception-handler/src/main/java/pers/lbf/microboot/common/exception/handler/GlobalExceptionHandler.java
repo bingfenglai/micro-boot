@@ -37,11 +37,12 @@ import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.support.WebExchangeBindException;
 import org.springframework.web.server.*;
-import pers.lbf.microboot.common.context.constant.EnvironmentParamsConstant;
-import pers.lbf.microboot.common.context.constant.ServiceStatusConstant;
-import pers.lbf.microboot.common.core.domain.result.ErrorAndExceptionResult;
-import pers.lbf.microboot.common.core.exception.ServiceException;
+import pers.lbf.microboot.common.core.constant.EnvironmentParamsConstants;
+import pers.lbf.microboot.common.core.constant.ServiceStatusConstants;
+import pers.lbf.microboot.common.core.exception.MicroServiceException;
+import pers.lbf.microboot.common.core.status.IStatus;
 import pers.lbf.microboot.common.exception.helper.DubboRpcExceptionMessageHelper;
+import pers.lbf.microboot.common.i18n.domain.result.ErrorAndExceptionResult;
 import reactor.core.publisher.Mono;
 
 import javax.validation.ConstraintViolation;
@@ -66,8 +67,8 @@ public class GlobalExceptionHandler implements ErrorWebExceptionHandler {
     @Value("spring.profiles.active")
     private String prefix;
 
-    public static final String DEFAULT_ERROR_MESSAGE = ServiceStatusConstant.default_error_message;
-    public static final String DEFAULT_ERROR_CODE = ServiceStatusConstant.default_error_code;
+    public static final String DEFAULT_ERROR_MESSAGE = ServiceStatusConstants.default_error_message;
+    public static final String DEFAULT_ERROR_CODE = ServiceStatusConstants.default_error_code;
 
 
     @Override
@@ -78,7 +79,7 @@ public class GlobalExceptionHandler implements ErrorWebExceptionHandler {
         response.getHeaders().set("Content-Type", "application/json;charset=utf-8");
         String path = request.getURI().getPath();
 
-        ErrorAndExceptionResult result = ErrorAndExceptionResult.getInstance(DEFAULT_ERROR_CODE, DEFAULT_ERROR_MESSAGE, path);
+        ErrorAndExceptionResult result = ErrorAndExceptionResult.getInstance(IStatus.unknownStatus(), path);
         result.setSuccess(false);
         doHandle(ex, result);
 
@@ -90,7 +91,7 @@ public class GlobalExceptionHandler implements ErrorWebExceptionHandler {
         log.error(String.valueOf(ex));
 
         // 生产环境屏蔽异常细节
-        if (EnvironmentParamsConstant.PROD.equals(prefix) && DEFAULT_ERROR_CODE.equals(result.getCode())) {
+        if (EnvironmentParamsConstants.PROD.equals(prefix) && DEFAULT_ERROR_CODE.equals(result.getCode())) {
             result.setMessage(DEFAULT_ERROR_MESSAGE);
         }
 
@@ -109,8 +110,8 @@ public class GlobalExceptionHandler implements ErrorWebExceptionHandler {
     private void doHandle(Throwable ex, ErrorAndExceptionResult result) {
         if (ex instanceof RpcException) {
             doHandleDubboCallRpcException((RpcException) ex, result);
-        } else if (ex instanceof ServiceException) {
-            doHandleServiceException((ServiceException) ex, result);
+        } else if (ex instanceof MicroServiceException) {
+            doHandleServiceException((MicroServiceException) ex, result);
         } else if (ex instanceof ResponseStatusException) {
             doHandleResponseStatusException((ResponseStatusException) ex, result);
         } else if (ex instanceof MethodArgumentNotValidException) {
@@ -156,8 +157,8 @@ public class GlobalExceptionHandler implements ErrorWebExceptionHandler {
     }
 
 
-    private void doHandleServiceException(ServiceException ex, ErrorAndExceptionResult result) {
-        result.setMessage(String.format("服务异常 消息：%s 服务模块%s 请求参数%s", ex.getMessage(), ex.getModule(), Arrays.toString(ex.getParams())));
+    private void doHandleServiceException(MicroServiceException ex, ErrorAndExceptionResult result) {
+        result.setMessage(String.format("服务异常 消息：%s 服务模块%s 请求参数%s", ex.getMessage(), ex.getServiceName(), Arrays.toString(ex.getParams())));
         result.setCode(ex.getExceptionCode());
     }
 

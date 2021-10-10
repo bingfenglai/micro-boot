@@ -17,7 +17,8 @@
 
 package pers.lbf.microboot.common.core.domain.result;
 
-import pers.lbf.microboot.common.context.constant.ServiceStatusConstant;
+import pers.lbf.microboot.common.core.constant.ServiceStatusConstants;
+import pers.lbf.microboot.common.core.status.IStatus;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -43,13 +44,19 @@ public abstract class BaseResult<T> implements IResult<T>, Serializable {
 
 
     public BaseResult() {
-        this.code = ServiceStatusConstant.SUCCESSFUL_OPERATION_CODE;
-        this.message = ServiceStatusConstant.SUCCESSFUL_OPERATION;
+        this.code = ServiceStatusConstants.SUCCESSFUL_OPERATION_CODE;
+        this.message = ServiceStatusConstants.SUCCESSFUL_OPERATION;
     }
 
+    @Deprecated
     public BaseResult(String code, String message) {
         this.code = code;
         this.message = message;
+    }
+
+    public BaseResult(IStatus status) {
+        this.code = status.getCode();
+        this.message = status.getMessage();
     }
 
     /**
@@ -79,7 +86,7 @@ public abstract class BaseResult<T> implements IResult<T>, Serializable {
      */
     @Override
     public Boolean isSuccess() {
-        return Objects.equals(this.code, ServiceStatusConstant.SUCCESSFUL_OPERATION_CODE);
+        return Objects.equals(this.code, ServiceStatusConstants.SUCCESSFUL_OPERATION_CODE);
     }
 
     public void setCode(String code) {

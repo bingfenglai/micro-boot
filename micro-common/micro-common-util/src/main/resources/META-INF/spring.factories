@@ -1,6 +1,0 @@
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-  pers.lbf.microboot.common.utils.SpringContextUtils
-
-
-
-

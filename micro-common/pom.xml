@@ -14,13 +14,14 @@
 
     <modules>
         <module>micro-common-dependency</module>
-        <module>micro-common-context</module>
+        <module>micro-common-domain-context-starter</module>
         <module>micro-common-swagger</module>
         <module>micro-common-mq-provider</module>
         <module>micro-common-core</module>
         <module>micro-common-util</module>
         <module>micro-common-exception-handler</module>
         <module>micro-common-log</module>
+        <module>micro-common-i18n-starter-webflux</module>
     </modules>
     <properties>
         <maven.compiler.source>8</maven.compiler.source>

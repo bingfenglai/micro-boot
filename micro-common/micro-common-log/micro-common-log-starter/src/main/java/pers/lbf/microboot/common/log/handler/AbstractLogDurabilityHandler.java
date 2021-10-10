@@ -17,10 +17,11 @@
 
 package pers.lbf.microboot.common.log.handler;
 
+
+import pers.lbf.microboot.common.context.util.ApplicationContextHelper;
 import pers.lbf.microboot.common.log.config.DefaultLogConfigProperties;
 import pers.lbf.microboot.common.log.constants.enums.LogDurabilityChannelEnum;
 import pers.lbf.microboot.common.log.domain.entity.LogInfoEntity;
-import pers.lbf.microboot.common.utils.SpringContextUtils;
 
 /**
  * 日志持久化处理器
@@ -38,7 +39,7 @@ public abstract class AbstractLogDurabilityHandler {
     private final AbstractLogDurabilityHandler next;
 
     static {
-        LOG_CONFIG_PROPERTIES = SpringContextUtils.getBean(DefaultLogConfigProperties.class);
+        LOG_CONFIG_PROPERTIES = ApplicationContextHelper.getBean(DefaultLogConfigProperties.class);
     }
 
 

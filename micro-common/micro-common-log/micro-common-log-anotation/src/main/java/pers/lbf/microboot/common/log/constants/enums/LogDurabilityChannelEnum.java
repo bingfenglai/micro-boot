@@ -26,7 +26,7 @@ package pers.lbf.microboot.common.log.constants.enums;
  */
 public enum LogDurabilityChannelEnum {
     /**
-     * 直接写入mysql
+     * 远程调用写入mysql
      */
     REMOTE_PROCESS_CALL("REMOTE_PROCESS_CALL"),
 
