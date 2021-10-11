@@ -14,7 +14,7 @@
  * limitations under the License.
  *
  */
-package pers.lbf.microboot.common.i18n.constants.status;
+package pers.lbf.common.authentication.constants.status;
 
 
 import pers.lbf.microboot.common.core.status.IStatus;

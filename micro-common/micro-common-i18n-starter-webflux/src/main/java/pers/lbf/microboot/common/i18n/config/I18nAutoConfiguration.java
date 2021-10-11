@@ -17,17 +17,19 @@
 
 package pers.lbf.microboot.common.i18n.config;
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.web.server.WebFilter;
 import pers.lbf.microboot.common.context.util.ApplicationContextHelper;
-import pers.lbf.microboot.common.i18n.config.properties.LocaleChangeConfigProperties;
+import pers.lbf.microboot.common.i18n.config.properties.I18nConfigProperties;
 import pers.lbf.microboot.common.i18n.web.filter.LocaleMessageContextWebFilter;
+import reactor.util.Logger;
+import reactor.util.Loggers;
 
 import static pers.lbf.microboot.common.i18n.constants.I18nConstants.AUTO_CONFIGURATION_PREFIX;
 
@@ -39,12 +41,13 @@ import static pers.lbf.microboot.common.i18n.constants.I18nConstants.AUTO_CONFIG
  * @date 2021/10/9 9:31
  */
 @Configuration
-@EnableConfigurationProperties(LocaleChangeConfigProperties.class)
 @ConditionalOnWebApplication(type = ConditionalOnWebApplication.Type.REACTIVE)
 @ConditionalOnProperty(prefix = AUTO_CONFIGURATION_PREFIX, name = "enabled", havingValue = "true", matchIfMissing = true)
 public class I18nAutoConfiguration {
 
     public static final String CUSTOM_MESSAGE_SOURCE = "customMessageSource";
+
+    private static final Logger logger = Loggers.getLogger(IExtendI18nMessageSource.class);
 
     /**
      * 配置本地化消息资源文件,覆盖默认配置
@@ -53,29 +56,56 @@ public class I18nAutoConfiguration {
      * @return message bean
      */
     @Bean(CUSTOM_MESSAGE_SOURCE)
-    public MessageSource createMessageSource(LocaleChangeConfigProperties properties) {
+    public ResourceBundleMessageSource createMessageSource(@Qualifier("i18nConfigProperties") I18nConfigProperties properties) {
         ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
-        messageSource.setBasename(properties.getBaseName());
+        messageSource.setBasename(properties.getBaseFile());
         messageSource.setDefaultEncoding(properties.getDefaultEncoding());
         messageSource.setUseCodeAsDefaultMessage(properties.isUseCodeAsDefaultMessage());
         messageSource.setCacheMillis(properties.getCacheMillis());
         messageSource.setFallbackToSystemLocale(properties.isFallbackToSystemLocale());
-        MessageSource parentMessageSource = this.getMessageParent();
 
-        if (parentMessageSource != null) {
-            messageSource.setParentMessageSource(parentMessageSource);
+
+        this.extendI18nMessageSource(messageSource);
+
+        if (properties.isSpringMessageSourceIntegrationEnabled()) {
+            this.extendSpringMessage(messageSource);
         }
+
         return messageSource;
     }
 
-    private MessageSource getMessageParent() {
-        MessageSource messageSource = null;
+    private void extendI18nMessageSource(ResourceBundleMessageSource messageSource) {
+        IExtendI18nMessageSource extendI18nMessageSource = ApplicationContextHelper.getBean(IExtendI18nMessageSource.class);
+
+        if (null == extendI18nMessageSource) {
+            logger.warn("IExtendI18nMessageSource instance is null");
+            return;
+        }
+        logger.info("扩展了用户自定义的message source");
+        extendI18nMessageSource.extendI18nMessageSource(messageSource);
+    }
+
+    private void extendSpringMessage(ResourceBundleMessageSource messageSource) {
+        MessageSource springMessageSource;
         try {
-            messageSource = ApplicationContextHelper.getBean("messageSource", MessageSource.class);
+            springMessageSource = ApplicationContextHelper.getBean("messageSource", MessageSource.class);
+
+            if (null == messageSource.getParentMessageSource()) {
+                messageSource.setParentMessageSource(springMessageSource);
+            } else {
+                MessageSource pms1 = messageSource.getParentMessageSource();
+                if (pms1 instanceof ResourceBundleMessageSource) {
+                    ResourceBundleMessageSource rbms = (ResourceBundleMessageSource) pms1;
+                    rbms.setParentMessageSource(springMessageSource);
+                } else {
+                    throw new IllegalArgumentException("MessageSource parent must be an instance of ResourceBundleMessageSource");
+                }
+            }
+
+            logger.info("扩展了用户自定义的spring message source");
         } catch (Exception ignore) {
         }
 
-        return messageSource;
     }
 
     @Bean

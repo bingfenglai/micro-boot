@@ -20,6 +20,7 @@ package pers.lbf.microboot.common.i18n.util;
 import lombok.AllArgsConstructor;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
+import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.stereotype.Component;
 import pers.lbf.microboot.common.context.util.ApplicationContextHelper;
 import pers.lbf.microboot.common.core.status.IStatus;
@@ -38,7 +39,7 @@ import static pers.lbf.microboot.common.i18n.config.I18nAutoConfiguration.CUSTOM
 public class LocaleMessageHolder {
 
     public static String getMessage(IStatus status) {
-        MessageSource messageSource = ApplicationContextHelper.getBean(CUSTOM_MESSAGE_SOURCE, MessageSource.class);
+        ResourceBundleMessageSource messageSource = ApplicationContextHelper.getBean(CUSTOM_MESSAGE_SOURCE, ResourceBundleMessageSource.class);
         return messageSource.getMessage(status.getCode(), null, LocaleContextHolder.getLocale());
     }
 

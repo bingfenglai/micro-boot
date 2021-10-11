@@ -16,4 +16,16 @@
         <maven.compiler.target>8</maven.compiler.target>
     </properties>
 
+    <dependencies>
+        <dependency>
+            <groupId>pers.lbf</groupId>
+            <artifactId>micro-common-core</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>pers.lbf</groupId>
+            <artifactId>micro-common-i18n-starter-webflux</artifactId>
+        </dependency>
+    </dependencies>
+
 </project>

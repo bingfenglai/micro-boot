@@ -42,9 +42,7 @@ public enum ServiceStatusEnums implements I18nStatus, Serializable {
     /**
      * 未知异常
      */
-    UNKNOWN_ERROR("未知异常", "e9999"),
-
-    NO_DATA_HAS_BEEN_FOUND("没有查询到相关数据", "svc01");
+    UNKNOWN_ERROR("未知异常", "e9999");
 
     /**
      * 消息

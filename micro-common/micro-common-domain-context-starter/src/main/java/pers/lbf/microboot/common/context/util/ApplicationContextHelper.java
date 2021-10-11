@@ -74,8 +74,10 @@ public class ApplicationContextHelper implements ApplicationContextAware {
             String simpleName = targetBeanClass.getSimpleName();
             //首字母小写
             simpleName = Character.toLowerCase(simpleName.charAt(0)) + simpleName.substring(1);
-
-            beanInstance = (T) ApplicationContextHelper.applicationContext.getBean(simpleName);
+            try {
+                beanInstance = (T) ApplicationContextHelper.applicationContext.getBean(simpleName);
+            } catch (Exception ignored) {
+            }
 
 
         }
