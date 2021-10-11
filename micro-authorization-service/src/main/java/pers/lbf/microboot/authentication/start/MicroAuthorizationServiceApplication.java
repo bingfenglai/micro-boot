@@ -32,10 +32,10 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 @SpringBootApplication(scanBasePackages = "pers.lbf.microboot.authentication")
 @Slf4j
 @EnableDiscoveryClient
-public class AuthenticationServiceApplication {
+public class MicroAuthorizationServiceApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(AuthenticationServiceApplication.class, args);
+        SpringApplication.run(MicroAuthorizationServiceApplication.class, args);
 
     }
 }

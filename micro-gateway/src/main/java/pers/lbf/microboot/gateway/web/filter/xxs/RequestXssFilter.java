@@ -67,7 +67,7 @@ public class RequestXssFilter implements GlobalFilter, Ordered {
         String contentType = serverHttpRequest.getHeaders().getFirst(HttpHeaders.CONTENT_TYPE);
 
         Boolean postFlag = (method == HttpMethod.POST || method == HttpMethod.PUT) &&
-                (MediaType.APPLICATION_FORM_URLENCODED_VALUE.equalsIgnoreCase(contentType) || MediaType.APPLICATION_JSON_VALUE.equals(contentType) || MediaType.APPLICATION_JSON_UTF8_VALUE.equals(contentType));
+                (MediaType.APPLICATION_FORM_URLENCODED_VALUE.equalsIgnoreCase(contentType) || MediaType.APPLICATION_JSON_VALUE.equals(contentType));
 
         // get 请求， 参考的是 org.springframework.cloud.gateway.filter.factory.AddRequestParameterGatewayFilterFactory
         if (method == HttpMethod.GET) {

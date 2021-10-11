@@ -1,8 +1,9 @@
 server:
-  port: 9001
+  port: 9002
 spring:
   application:
-    name: micro-basic-support-service
+    name: micro-authorization-service
+
   profiles:
     active: dev
   cloud:
@@ -18,5 +19,3 @@ spring:
         enabled: false
       discovery:
         enabled: false
-  main:
-    allow-bean-definition-overriding: true

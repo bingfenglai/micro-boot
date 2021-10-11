@@ -15,7 +15,7 @@
         <module>micro-common</module>
         <module>micro-gateway</module>
         <module>micro-api</module>
-        <module>micro-authentication-service</module>
+        <module>micro-authorization-service</module>
         <module>micro-basic-support-services</module>
     </modules>
 
@@ -141,6 +141,8 @@
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-security-dependencies</artifactId>
                 <version>${spring-cloud-security.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
             </dependency>
 
             <!--            dubbo 依赖 服务调用-->
