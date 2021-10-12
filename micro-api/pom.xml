@@ -18,8 +18,8 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>micro-dubbo-api</module>
-        <module>micro-http-api</module>
+        <module>micro-api-dubbo</module>
+        <module>micro-api-http</module>
     </modules>
 
 </project>

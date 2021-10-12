@@ -15,7 +15,7 @@
  *
  */
 
-package pers.lbf.microboot.authentication.start;
+package pers.lbf.microboot.authorization.start;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
@@ -23,19 +23,19 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 /**
- * TODO
+ * 授权微服务
  *
  * @author 赖柄沣 bingfengdev@aliyun.com
  * @version 1.0
  * @date 2021/10/8 22:09
  */
-@SpringBootApplication(scanBasePackages = "pers.lbf.microboot.authentication")
+@SpringBootApplication(scanBasePackages = "pers.lbf.microboot.authorization")
 @Slf4j
 @EnableDiscoveryClient
-public class MicroAuthorizationServiceApplication {
+public class MicroAuthorizationService {
 
     public static void main(String[] args) {
-        SpringApplication.run(MicroAuthorizationServiceApplication.class, args);
+        SpringApplication.run(MicroAuthorizationService.class, args);
 
     }
 }

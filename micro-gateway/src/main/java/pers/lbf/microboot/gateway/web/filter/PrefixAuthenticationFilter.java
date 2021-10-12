@@ -25,7 +25,8 @@ import org.springframework.core.Ordered;
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
 import pers.lbf.microboot.common.core.exception.MicroServiceException;
-import pers.lbf.microboot.common.i18n.constants.status.AuthStatusEnum;
+import pers.lbf.microboot.common.i18n.constants.I18nCommonStatus;
+import pers.lbf.microboot.common.i18n.constants.status.I18nStatus;
 import pers.lbf.microboot.common.utils.MicroStringUtils;
 import pers.lbf.microboot.gateway.config.AccessWhiteProperties;
 import pers.lbf.microboot.gateway.constants.OperationTypeConstant;
@@ -63,7 +64,19 @@ public class PrefixAuthenticationFilter implements GlobalFilter, Ordered {
         // 2. 判断访问路径是否在放行白名单当中
         if (!MicroStringUtils.matches(path, accessWhiteProperties.getWhites())) {
             log.warn("{} 访问 {} 鉴权不通过", HttpUtils.getIpAddress(exchange.getRequest()), path);
-            throw new MicroServiceException(AuthStatusEnum.NO_TOKEN);
+
+            throw new MicroServiceException(new I18nStatus() {
+
+                /**
+                 * 状态编码
+                 *
+                 * @return code
+                 */
+                @Override
+                public String getCode() {
+                    return I18nCommonStatus.NO_TOKEN.getCode();
+                }
+            });
         }
 
         //2.2 token存在则放行

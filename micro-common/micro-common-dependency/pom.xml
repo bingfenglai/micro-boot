@@ -27,6 +27,12 @@
 
             <dependency>
                 <groupId>pers.lbf</groupId>
+                <artifactId>micro-common-authentication</artifactId>
+                <version>${micro.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>pers.lbf</groupId>
                 <artifactId>micro-common-i18n-starter-webflux</artifactId>
                 <version>${micro.version}</version>
             </dependency>
