@@ -27,7 +27,7 @@
 
             <dependency>
                 <groupId>pers.lbf</groupId>
-                <artifactId>micro-common-authentication</artifactId>
+                <artifactId>micro-common-authorization</artifactId>
                 <version>${micro.version}</version>
             </dependency>
 

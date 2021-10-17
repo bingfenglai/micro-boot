@@ -22,7 +22,7 @@
         <module>micro-common-exception-handler</module>
         <module>micro-common-log</module>
         <module>micro-common-i18n-starter-webflux</module>
-        <module>micro-common-authentication</module>
+        <module>micro-common-authorization</module>
     </modules>
     <properties>
         <maven.compiler.source>8</maven.compiler.source>

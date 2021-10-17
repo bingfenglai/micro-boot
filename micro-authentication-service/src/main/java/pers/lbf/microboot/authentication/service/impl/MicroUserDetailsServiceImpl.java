@@ -1,0 +1,59 @@
+/*
+ * Copyright 2020 赖柄沣 bingfengdev@aliyun.com
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ */
+
+package pers.lbf.microboot.authentication.service.impl;
+
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Service;
+import pers.lbf.microboot.authentication.domain.MicroUserDetails;
+import pers.lbf.microboot.authentication.service.MicroUserDetailsService;
+import reactor.core.publisher.Mono;
+
+/**
+ * TODO
+ *
+ * @author 赖柄沣 bingfengdev@aliyun.com
+ * @version 1.0
+ * @date 2021/10/14 12:21
+ */
+@Service
+@Slf4j
+public class MicroUserDetailsServiceImpl implements MicroUserDetailsService {
+    @Override
+    public Mono<UserDetails> updatePassword(UserDetails userDetails, String s) {
+        return Mono.just(userDetails);
+    }
+
+    @Override
+    public Mono<UserDetails> findByUsername(String s) {
+        log.info("查找用户：{}", s);
+        UserDetails userDetails = MicroUserDetails
+                .withUsername(s)
+                .password("{noop}123456")
+                .roles("admin")
+                .authorities("*:**")
+                .accountExpired(false)
+                .accountLocked(false)
+                .credentialsExpired(false)
+                .disabled(false)
+                .build();
+        return Mono.just(userDetails);
+    }
+
+
+}

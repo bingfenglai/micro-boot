@@ -15,7 +15,7 @@
         <module>micro-common</module>
         <module>micro-gateway</module>
         <module>micro-api</module>
-        <module>micro-authorization-service</module>
+        <module>micro-authentication-service</module>
         <module>micro-basic-support-services</module>
     </modules>
 
@@ -31,7 +31,7 @@
         <spring-cloud-alibaba.version>2021.1</spring-cloud-alibaba.version>
         <spring-cloud.version>2020.0.4</spring-cloud.version>
         <spring.boot.version>2.5.5</spring.boot.version>
-        <spring-cloud-security.version>2.2.4.RELEASE</spring-cloud-security.version>
+        <spring-cloud-security.version>2.2.5.RELEASE</spring-cloud-security.version>
         <lombok.version>1.18.20</lombok.version>
         <dubbo.version>2.7.8</dubbo.version>
         <dubbo-api.version>2.7.8.1</dubbo-api.version>
@@ -121,6 +121,18 @@
             </dependency>
 
             <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-oauth2-client</artifactId>
+                <version>${spring.boot.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-oauth2-resource-server</artifactId>
+                <version>${spring.boot.version}</version>
+            </dependency>
+
+            <dependency>
                 <groupId>de.codecentric</groupId>
                 <artifactId>spring-boot-admin-dependencies</artifactId>
                 <version>${spring-boot-admin.version}</version>
@@ -143,6 +155,12 @@
                 <version>${spring-cloud-security.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.security.oauth</groupId>
+                <artifactId>spring-security-oauth2</artifactId>
+                <version>${spring-cloud-security.version}</version>
             </dependency>
 
             <!--            dubbo 依赖 服务调用-->

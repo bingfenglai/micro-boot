@@ -80,7 +80,7 @@ public interface IResult<T> {
              */
             @Override
             public String getMessage() {
-                return IStatus.unknownStatus().getMessage();
+                return IStatus.successStatus().getMessage();
             }
 
             /**
